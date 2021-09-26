@@ -6,30 +6,26 @@ This home work was defined in the slide titled [Homework - 17 Aug](./Homework3.m
 
 # Implementation
 
-<ul>
-<li>This homework submission was forked from the repository https://github.com/qinjiang03/backend-development.</li>
-<li>The changes are make in the folder `5e-swagger` in the repository.</li>
-<li>The changes are achieved with modification to these two files in the folder:
+This homework submission was forked from the repository https://github.com/qinjiang03/backend-development.
+
+The changes are make in the folder `5e-swagger` in the repository.
+
+The changes are achieved with modification to these two files in the folder:
+
+- `srv\db\items.js`:
     <ul>
-    <li>`srv\db\items.js`:
-        <ul>
         <li>Enhanced method db.findAllItems to accept an optional argument `uid`.  When provided, 
             the method will only return Items created by that `uid`.</li>
         <li>Modified method db.updateItem to update an Item only if the Item was created by the 
             requesting user.  When not, return null.</li>
-        </ul>
-    </li>
-    <li>srv\routes\items.js
-        <ul>
+    </ul>
+- srv\routes\items.js
+    <ul>
         <li>Added a new route `/items/{uid}/user` to make use of the enhanced method db.findAllItems 
             to list Items created by the specified user.</li>
         <li>Modified route response for `PUT/items/{id}` to handle the circumstance when the requesting user
             is not the user who created the Item.</li>
-	</ul>
-    </li>
     </ul>
-</li>
-</ul>
 
 ## Deployment
 
