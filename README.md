@@ -2,13 +2,13 @@
 
 # Day 3 (Aug 17) Home work
 
-This home work was defined in the slide titled Homework - 17 Aug.
+This home work was defined in the slide titled [Homework - 17 Aug](./Homework3.md).
 
 # Implementation
 
 <ul>
-<li>Fork from the repository https://github.com/qinjiang03/backend-development.</li>
-<li>Start from folder `5e-swagger` in the repository.</li>
+<li>This homework submission was forked from the repository https://github.com/qinjiang03/backend-development.</li>
+<li>The changes are make in the folder `5e-swagger` in the repository.</li>
 <li>The changes are achieved with modification to these two files in the folder:</li>
     <ul>
     <li>`srv\db\items.js`:
