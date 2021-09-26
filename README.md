@@ -1,46 +1,53 @@
-# Backend Development
+## Fundamentals in Backend Development
 
-Code repository for the `Fundamentals in Backend Development` course.
+# Day 3 (Aug 17) Home work
 
-## Requirements
+This home work was defined in the slide titled Homework - 17 Aug.
 
-1. Node.js: https://nodejs.org/en/download/
-2. Postgres: https://www.postgresql.org/download/
-3. Docker: https://www.docker.com/products/docker-desktop
-4. Heroku CLI: https://devcenter.heroku.com/articles/heroku-cli
+# Implementation
 
-## Folder Structure
+<ul>
+<li>Fork from the repository https://github.com/qinjiang03/backend-development.</li>
+<li>Start from folder `5e-swagger` in the repository.</li>
+<li>The changes are achieved with modification to these two files in the folder:</li>
+    <ul>
+    <li>`srv\db\items.js`:
+        <ul>
+        <li>Enhanced method db.findAllItems to accept an optional argument `uid`.  When provided, 
+	    the method will only return Items created by that `uid`.<li>
+        <li>Modified method db.updateItem to update an Item only if the Item was created by the 
+		    requesting user.  When not, return null.<li>
+		</ul>
+    <li>srv\routes\items.js
+        <ul>
+        <li>Added a new route `/items/{uid}/user` to make use of the enhanced method db.findAllItems 
+		    to list Items created by the specified user.<li>
+        <li>Modified route response for `PUT/items/{id}` to handle the circumstance when the requesting user
+		    is not the user who created the Item.<li>
+		</ul>
+    </ul>
+</ul>
 
-### Backend service
+## Deployment
 
-The backend service code is split into different stages to illustrate the incremental development of the application.
+The homework has been uploaded to GitHub in repository `https://github.com/encore428/backend-development.git`.
+Clone it to your local computer.  The computer has to have PostgreSQL installed.
 
-1. `5a-crud`: Basic CRUD setup
-2. `5b-postgres`: Using Postgres with our app
-3. `5c-dependency-injection`: Refactoring to use dependency injection
-4. `5d-jwt`: Using JWT as authentication
-5. `5e-swagger`: Adding Swagger documentation
-6. `6a-unit-tests`: Adding unit tests
-7. `6b-integration-tests`: Adding integration tests
-8. `7a-docker`: Dockerizing our app
-9. `7b-heroku`: Deploying to Heroku
-10. `7c-github-actions`: Incorporating GitHub Actions
+Edit file `.env` to set up your DATABASE_URL.
 
-### Examples
-
-The `examples` folder contains code examples for different concepts, e.g. `unit-testing`.
-
-## Usage
-
-In order to run the application in **each** folder, you will need to perform the following steps
-
+Perform the following to bring up the application:
 ```bash
-# Change to the directory, e.g. 5a-crud
-$ cd 5a-crud
+# Change to the directory
+$ cd 5e-swagger
 
 # Install project dependencies
 $ npm install
 
+# Database tables setup
+$ npm run db:migrate
+
 # Start server
 $ npm run start
 ```
+
+User Postman to test the app.

@@ -73,6 +73,35 @@ module.exports = (db) => {
 
   /**
    * @openapi
+   * /items/{uid}/user:
+   *  get:
+   *    tags:
+   *    - items
+   *    description: Get Items created by User
+   *    parameters:
+   *      - in: path
+   *        name: uid
+   *        schema:
+   *          type: integer
+   *        required: true
+   *    responses:
+   *      200:
+   *        description: OK
+   *        content:
+   *          application/json:
+   *            schema:
+   *              type: array
+   *              items:
+   *                $ref: '#/components/schemas/Item'
+   */
+  router.get('/:uid/user', async (req, res, next) => {
+    const uid = req.params.uid
+    const items = await db.findAllItems(uid)
+    res.send(items)
+  })
+
+  /**
+   * @openapi
    * /items/{id}:
    *  get:
    *    tags:
@@ -128,6 +157,8 @@ module.exports = (db) => {
    *          application/json:
    *            schema:
    *              $ref: '#/components/schemas/Item'
+   *      401:
+   *        description: Item with specified id not found or not authorised
    */
   router.put('/:id', async (req, res, next) => {
     const uid = req.uid
@@ -135,7 +166,11 @@ module.exports = (db) => {
     const { name, quantity } = req.body
     const updatedItem = new Item({ name, quantity, uid })
     const item = await db.updateItem(id, updatedItem)
-    res.send(item)
+    if (item) {
+      res.send(item)
+    } else {
+      res.status(401).send(`Item id ${id} not found or not authorised`)
+    }
   })
 
   /**
@@ -154,6 +189,8 @@ module.exports = (db) => {
    *    responses:
    *      200:
    *        description: OK
+   *      400:
+   *        description: Item with specified id not found
    */
   router.delete('/:id', async (req, res, next) => {
     const id = req.params.id

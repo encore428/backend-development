@@ -11,10 +11,15 @@ module.exports = (pool) => {
     return new Item(res.rows[0])
   }
   
-  db.findAllItems = async () => {
-    const res = await pool.query(
-      'SELECT * FROM Items'
-    )
+  db.findAllItems = async (uid) => {
+    const res = uid===undefined?
+      await pool.query(
+        'SELECT * FROM Items'
+      ):
+      await pool.query(
+        'SELECT * FROM Items WHERE uid=$1',
+        [uid]
+      )      
     return res.rows.map(row => new Item(row))
   }
 
@@ -28,10 +33,10 @@ module.exports = (pool) => {
 
   db.updateItem = async (id, item) => {
     const res = await pool.query(
-      'UPDATE Items SET name=$2, quantity=$3, uid=$4 WHERE id=$1 RETURNING *',
+      'UPDATE Items SET name=$2, quantity=$3 WHERE id=$1 AND uid=$4 RETURNING *',
       [id, item.name, item.quantity, item.uid]
     )
-    return new Item(res.rows[0])
+    return res.rowCount ? new Item(res.rows[0]) : null
   }
 
   db.deleteItem = async (id) => {
