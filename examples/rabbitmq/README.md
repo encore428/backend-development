@@ -2,7 +2,7 @@
 
 # Day 4 (Aug 24) Home work
 
-This home work was defined in the slide titled [Homework - 17 Aug](./Homework - 24 Aug.pdf), which specified the following:
+This home work was defined in the slide titled <a href="./Homework - 24 Aug.pdf">[Homework - 17 Aug]</a>, which specified the following:
 1. Create two simple Express.js server applications using amqplib:
 a. A producer that publishes these messages to the “heartbeat” queue:
 i. Every minute: “I’m alive at ${datetime}!”

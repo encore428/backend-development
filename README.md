@@ -2,7 +2,7 @@
 
 # Day 3 (Aug 17) Home work
 
-This home work was defined in the slide titled ![Homework - 17 Aug](./Homework - 17 Aug.pdf), which specified this:
+This home work was defined in the slide titled <a href="./Homework - 17 Aug.pdf">[Homework - 17 Aug]</a>, which specified this:
 
 Extend the CRUD app with the following:
 <ol>
